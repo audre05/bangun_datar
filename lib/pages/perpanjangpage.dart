@@ -1,0 +1,77 @@
+import 'package:bangun_datar_pp/controller/perpanjangcontroler.dart';
+import 'package:bangun_datar_pp/controller/persegicontroler.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class persegipanjang extends StatelessWidget {
+  persegipanjang({super.key});
+
+  final perpanjangcontroler _perpanjangcontroller = Get.put(perpanjangcontroler());
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("persegipanjang page"),
+      ),
+      body: Column(children: [
+        Image.asset("assets/img_2.png", height: 170),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 16),
+          child: Text("persegipanjang"),
+        ),
+        Text(
+            "Persegi panjang adalah suatu segi empat yang keempat sudutnya siku-siku dan panjang sisi-sisi yang berhadapan sama ."),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: TextFormField(
+            onChanged: (value) {
+              _perpanjangcontroller.panjang = int.parse(value);
+            },
+            decoration: InputDecoration(
+                fillColor: Colors.white,
+                filled: true,
+                labelText: "sisi",
+                hintText: "hitung sisi",
+                hintStyle: TextStyle(color: Colors.grey.shade400),
+                contentPadding:
+                EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(width: 1, color: Colors.grey),
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 1, color: Colors.grey),
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 1, color: Colors.blue),
+                    borderRadius: BorderRadius.all(Radius.circular(10)))),
+          ),
+        ),
+        Obx(() => Text(_perpanjangcontroller.hasil.value)),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+                onPressed: () {
+                  _perpanjangcontroller.hitungLuas();
+                },
+                style: ButtonStyle(
+                  backgroundColor:
+                  MaterialStateProperty.all<Color>(Colors.redAccent),
+                ),
+                child: Text("hitungluas")),
+            ElevatedButton(
+                onPressed: () {
+                  _perpanjangcontroller.hitungKeliling();
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.teal),
+                ),
+                child: Text("hitungkeliling")),
+          ],
+        )
+      ]),
+    );
+  }
+}
